@@ -375,6 +375,10 @@ pub struct TransactionalTrees {
 }
 
 impl TransactionalTrees {
+    pub fn as_slice(&self) -> &[TransactionalTree] {
+        &self.inner[..]
+    }
+
     fn stage(&self) -> Protector<'_> {
         concurrency_control::write()
     }
