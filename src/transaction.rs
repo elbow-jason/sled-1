@@ -375,6 +375,9 @@ pub struct TransactionalTrees {
 }
 
 impl TransactionalTrees {
+    /// A public function for getting the slice of the inner
+    /// Vec<TransactionalTree>. Very useful for implementing
+    /// Transactional trait for non-sled-owned types.
     pub fn as_slice(&self) -> &[TransactionalTree] {
         &self.inner[..]
     }
