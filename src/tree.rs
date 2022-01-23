@@ -4,6 +4,7 @@ use std::{
     num::NonZeroU64,
     ops::{self, Deref, RangeBounds},
     sync::atomic::Ordering::SeqCst,
+    path::PathBuf,
 };
 
 use parking_lot::RwLock;
@@ -103,6 +104,15 @@ const fn bounds_error() -> Result<()> {
 #[doc(alias = "bucket")]
 #[doc(alias = "table")]
 pub struct Tree(pub(crate) Arc<TreeInner>);
+
+impl Tree {
+    /// The path of the underlying Db.
+    /// Used in TransactionalTree building to ensure same-db-trees are
+    /// being used in a transaction.
+    pub fn get_path(&self) -> PathBuf {
+        self.context.get_path()
+    }
+}
 
 #[allow(clippy::module_name_repetitions)]
 pub struct TreeInner {
