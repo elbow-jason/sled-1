@@ -359,7 +359,8 @@ impl TransactionalTree {
         self.tree.apply_batch_inner(writes, Some(event), &mut guard)
     }
 
-    fn from_tree(tree: &Tree) -> Self {
+    /// Constructs a TransactionalTree from a Tree.
+    pub fn from_tree(tree: &Tree) -> Self {
         Self {
             tree: tree.clone(),
             writes: Default::default(),
